@@ -1,0 +1,459 @@
+package FracCalc;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class FracCalcTester {
+   
+   @Test
+   public void myTest_25_4() {
+       Fraction aFraction = new Fraction(25, 4);
+       assertEquals("25/4", aFraction.toString());
+   }
+   @Test
+   public void myTest_neg25_4() {
+       Fraction aFraction = new Fraction(-25, 4);
+       assertEquals("-25/4", aFraction.toString());
+   }
+   @Test
+   public void myTest_25_neg3() {
+       Fraction aFraction = new Fraction(-25, 3);
+       assertEquals("-25/3", aFraction.toString());
+   }
+   @Test
+   public void myTest_37_2() {
+       Fraction aFraction = new Fraction(37, 2);
+       assertEquals("37/2", aFraction.toString());
+   }
+   @Test
+   // Test proper fraction input
+   public void myTest_2_2_5() {
+       Fraction aFraction = new Fraction("2_2/5");
+       assertEquals("12/5", aFraction.toString());
+   }
+   @Test
+   // Test whole number input
+   public void myTest_5() {
+       Fraction aFraction = new Fraction("5");
+       assertEquals("5/1", aFraction.toString());
+   }
+   @Test
+   // Test fraction input
+   public void myTest_3_4() {
+       Fraction aFraction = new Fraction("3/4");
+       assertEquals("3/4", aFraction.toString());
+   }
+   @Test
+   public void testParseInt() {
+       Fraction result = new Fraction("2");
+       assertEquals("Fraction should parse 2 and spit it back out again", "2/1", result.toString());
+   }
+   @Test
+   public void testParseFraction() {
+       Fraction result = new Fraction("11/47");
+       assertEquals("Fraction should parse 11/47 and spit it back out again", "11/47", result.toString());
+   }
+   @Test
+   public void testParseMixed() {
+       Fraction result = new Fraction("123_45/67");
+       assertEquals("Fraction should parse 123_45/67 and spit it back out again", "8286/67", result.toString());
+  }
+   @Test
+   public void testParseNegativeMixed() {
+       Fraction result = new Fraction("-2_3/5");
+       assertEquals("Fraction should parse -2_3/5 and spit it back out again", "-13/5", result.toString());
+   }
+
+   @Test
+   public void additionIntegers() {
+      Fraction result = FracCalc.calculate("1 + 7");
+      assertEquals("1 + 7 should equal 8", "8", result.toString());
+   }
+
+   @Test
+   public void additionFractions() {
+      Fraction result = FracCalc.calculate("1/16 + 7/16");
+      assertEquals("[Reduction] 1/16 + 7/16 should equal 1/2", "1/2", result.toString());
+   }
+
+   @Test
+   public void additionMixed() {
+      Fraction result = FracCalc.calculate("1_1/6 + 7_1/3");
+      assertEquals("[Mixed, Reduction] 1_1/6 + 7_1/3 should equal 8_1/2", "8_1/2", result.toString());
+   }
+
+   @Test
+   public void additionIntegersNegative() {
+      Fraction result = FracCalc.calculate("11 + -8");
+      assertEquals("[Negative] 11 + -8 should equal 3", "3", result.toString());
+   }
+
+   @Test
+   public void additionFractionsNegative() {
+      Fraction result = FracCalc.calculate("-11/7 + 3/16");
+      assertEquals("[Negative, MixedOutput] -11/7 + 3/16 should equal -1_43/112", "-1_43/112", result.toString());
+   }
+   @Test
+   public void largeMixedNumbersParsing() {
+      Fraction result = FracCalc.calculate("135_1351/236");
+      assertEquals("123_1251/236 should equal 140_171/236", "140_171/236", result.toString());
+   }
+   
+   @Test
+   public void largeNumbersAddition() {
+      Fraction result = FracCalc.calculate("13561/1362 + 1366/2385");
+      assertEquals("13561/1362 + 1366/2385 should equal 10_573259/1082790", "10_573259/1082790", result.toString());
+   }
+      
+   @Test
+   public void largeNumbersSubtraction() {
+      Fraction result = FracCalc.calculate("13_13672/137 - 36");
+      assertEquals("13_13672/137 - 36 should equal 76_109/137", "76_109/137", result.toString());
+   }
+      
+   @Test
+   public void largeNumbersMultiplication() {
+      Fraction result = FracCalc.calculate("3518/217 * 23592/942");
+      assertEquals("3518/217 * 23592/942 should equal 406_762/34069", "406_762/34069", result.toString());
+   }
+      
+   @Test
+   public void largeNumbersDivision() {
+      Fraction result = FracCalc.calculate("9315_125/136 / 136_8235/235");
+      assertEquals("9315_125/136 / 136_8235/235 should equal 54_508939/1093304", "54_508939/1093304", result.toString());
+   }
+   //testing for negative-related bugs.
+   @Test
+   public void negativeAddition() {
+      Fraction result = FracCalc.calculate("-13 + 2_23/3");
+      assertEquals("-13 + 2_23/3 should equal -3_1/3", "-3_1/3", result.toString());
+   }
+         
+   @Test
+   public void negativeSubtraction() {
+      Fraction result = FracCalc.calculate("50 - -2/5");
+      assertEquals("50 - -2/5 should equal 50_2/5", "50_2/5", result.toString());
+   }
+         
+   @Test
+   public void negativeMultiplication() {
+      Fraction result = FracCalc.calculate("-23 * -12/5");
+      assertEquals("-23 * -12/5 should equal 55_1/5", "55_1/5", result.toString());
+   }
+         
+   @Test
+   public void negativeDivision() {
+      Fraction result = FracCalc.calculate("-1/4 / 1_1/8");
+      assertEquals("-1/4 / 1_1/8 should equal -2/9", "-2/9", result.toString());
+   }
+
+   //subtraction-related testing
+   @Test
+   public void mixedSubtraction() {
+      Fraction result = FracCalc.calculate("1/4 - 1_1/8");
+      assertEquals("1/4 - 1_1/8 should equal -7/8", "-7/8", result.toString());
+   }
+            
+   @Test
+   public void wholeSubtraction() {
+      Fraction result = FracCalc.calculate("55 - 13");
+      assertEquals("55 - 13 should equal 42", "42", result.toString());
+   }
+            
+   @Test
+   public void fractionSubtraction() {
+      Fraction result = FracCalc.calculate("5/3 - 1/6");
+      assertEquals("5/3 - 1/6 should equal 1_1/2", "1_1/2", result.toString());
+   }
+   
+   @Test
+   public void negativeMixedSubtraction() {
+      Fraction result = FracCalc.calculate("-5_1/3 - 1/3");
+      assertEquals("-5_1/3 - 1/3 should equal-5_2/3", "-5_2/3", result.toString());
+   }
+
+   //multiplication-related testing
+   @Test
+   public void mixedMultiplication() {
+      Fraction result = FracCalc.calculate("6_26/4 * 61_7/8");
+      assertEquals("6_26/4 * 61_7/8 should equal 773_7/16", "773_7/16", result.toString());
+   }
+   
+   @Test
+   public void wholeMultiplication() {
+      Fraction result = FracCalc.calculate("4 * 6");
+      assertEquals("4 * 6 should equal 24", "24", result.toString());
+   }
+            
+   @Test
+   public void fractionMultiplication() {
+      Fraction result = FracCalc.calculate("1/4 * 2/6");
+      assertEquals("1/4 * 2/6 should equal 1/12", "1/12", result.toString());
+   }
+   
+   @Test
+   public void negativeMixedMultiplication() {
+      Fraction result = FracCalc.calculate("-15_-1/-2 * -5/-5");
+      assertEquals("-15_-1/-2 * -5/-5 should equal -15_1/2", "-15_1/2", result.toString());
+   }
+   
+   //division-related testing
+   @Test
+   public void mixedDivision() {
+      Fraction result = FracCalc.calculate("5_1/3 / 8_2/2");
+      assertEquals("5_1/3 / 8_2/2 should equal 16/27", "16/27", result.toString());
+   }
+   
+   @Test
+   public void wholeDivision() {
+      Fraction result = FracCalc.calculate("5 / 9");
+      assertEquals("5 / 9 should equal 5/9", "5/9", result.toString());
+   }
+            
+   @Test
+   public void fractionDivision() {
+      Fraction result = FracCalc.calculate("1/4 * 2/6");
+      assertEquals("1/4 * 2/6 should equal 1/12", "1/12", result.toString());
+   }
+   
+   @Test
+   public void negativeMixedDivision() {
+      Fraction result = FracCalc.calculate("-14_1/4 / 7_1/4");
+      assertEquals("-14_1/4 / 7_1/4 should equal -1_28/29", "-1_28/29", result.toString());
+   }
+   
+   //tests from pseudo-code (it could be good to use tests from a thought-process from before making the code)
+   //very glad I did these tests, they helped me discover a bug involving the parsing of negatives.
+   @Test
+   public void pseudo1() {
+      Fraction result = FracCalc.calculate("1");
+      assertEquals("1 should equal 1", "1", result.toString());
+   }
+   
+   @Test
+   public void pseudo2() {
+      Fraction result = FracCalc.calculate("3");
+      assertEquals("3 should equal 3", "3", result.toString());
+   }
+            
+   @Test
+   public void pseudo3() {
+      Fraction result = FracCalc.calculate("-5");
+      assertEquals("-5 should equal -5", "-5", result.toString());
+   }
+   
+   @Test
+   public void pseudo4() {
+      Fraction result = FracCalc.calculate("5/3");
+      assertEquals("5/3 should equal 1_2/3", "1_2/3", result.toString());
+   }
+
+   @Test
+   public void pseudo5() {
+      Fraction result = FracCalc.calculate("-5/3");
+      assertEquals("-5/3 should equal -1_2/3", "-1_2/3", result.toString());
+   }
+
+   @Test
+   public void pseudo6() {
+      Fraction result = FracCalc.calculate("5/-3");
+      assertEquals("5/-3 should equal -1_2/3", "-1_2/3", result.toString());
+   }
+            
+   @Test
+   public void pseudo7() {
+      Fraction result = FracCalc.calculate("-5/-3 * 5");
+      assertEquals("-5/-3 * 5 should equal 8_1/3", "8_1/3", result.toString());
+   }
+   
+   @Test
+   public void pseudo8() {
+      Fraction result = FracCalc.calculate("-5_3/-4");
+      assertEquals("-5_3/-4 should equal 5_3/4", "5_3/4", result.toString());
+   }
+   @Test
+   public void pseudo9() {
+      Fraction result = FracCalc.calculate("-5_5/6 / 4");
+      assertEquals("-5_5/6 / 4 should equal -1_11/24", "-1_11/24", result.toString());
+   }
+   
+   @Test
+   public void pseudo10() {
+      Fraction result = FracCalc.calculate("5_5/5");
+      assertEquals("5_5/5 should equal 6", "6", result.toString());
+   }
+            
+   @Test
+   public void pseudo11() {
+      Fraction result = FracCalc.calculate("-5_-5/-5");
+      assertEquals("-5_-5/-5 should equal -6", "-6", result.toString());
+   }
+   
+   @Test
+   public void pseudo12() {
+      Fraction result = FracCalc.calculate("6/3 + -1");
+      assertEquals("6/3 + -1 should equal 1", "1", result.toString());
+   }
+   @Test
+   public void pseudo13() {
+      Fraction result = FracCalc.calculate("5_7/3");
+      assertEquals("5_7/3 should equal 7_1/3", "7_1/3", result.toString());
+   }
+   
+   @Test
+   public void pseudo14() {
+      Fraction result = FracCalc.calculate("1/2 + 4/3");
+      assertEquals("1/2 + 4/3 should equal 1_5/6", "1_5/6", result.toString());
+   }
+            
+   @Test
+   public void pseudo15() {
+      Fraction result = FracCalc.calculate("1/2 + -4/3");
+      assertEquals("1/2 + -4/3 should equal -5/6", "-5/6", result.toString());
+   }
+   
+   @Test
+   public void pseudo16() {
+      Fraction result = FracCalc.calculate("1/2 + -4/-2");
+      assertEquals("1/2 + -4/-2 should equal 2_1/2", "2_1/2", result.toString());
+   }
+   @Test
+   public void pseudo17() {
+      Fraction result = FracCalc.calculate("1/2 - 1/4");
+      assertEquals("1/2 - 1/4 should equal 1/4", "1/4", result.toString());
+   }
+   
+   @Test
+   public void pseudo18() {
+      Fraction result = FracCalc.calculate("2/1 / 1");
+      assertEquals("2/1 / 1 should equal 2", "2", result.toString());
+   }
+            
+   @Test
+   public void pseudo19() {
+      Fraction result = FracCalc.calculate("2 * 1/4");
+      assertEquals("2 * 1/4 should equal 1/2", "1/2", result.toString());
+   }
+   
+   @Test
+   public void pseudo20() {
+      Fraction result = FracCalc.calculate("5_3/3 - 3/3");
+      assertEquals("5_3/3 - 3/3 should equal 5", "5", result.toString());
+   }
+   //extra tests for fraction parsing, as I believe the math functions work fine at this point. All possibilities of how the user can input their negatives are present.
+   @Test
+   public void mixedFraction() {
+      Fraction result = FracCalc.calculate("13_1/3");
+      assertEquals("13_1/3 should equal 13_1/3", "13_1/3", result.toString());
+   }
+      
+   @Test
+   public void whole() {
+      Fraction result = FracCalc.calculate("136");
+      assertEquals("5 should equal 136", "136", result.toString());
+   }
+      
+   @Test
+   public void fraction() {
+      Fraction result = FracCalc.calculate("15/3");
+      assertEquals("15/3 should equal 5", "5", result.toString());
+   }
+      
+   @Test
+   public void negativeFirstMixed() {
+      Fraction result = FracCalc.calculate("-3_5/3");
+      assertEquals("-3_5/3 should equal -4_2/3", "-4_2/3", result.toString());
+   }
+
+   @Test
+   public void negativeSecondMixed() {
+      Fraction result = FracCalc.calculate("3_-5/3");
+      assertEquals("3_-5/3 should equal -4_2/3", "-4_2/3", result.toString());
+   }
+      
+   @Test
+   public void negativeThirdMixed() {
+      Fraction result = FracCalc.calculate("3_5/-3");
+      assertEquals("3_5/-3 should equal -4_2/3", "-4_2/3", result.toString());
+   }
+      
+   @Test
+   public void negativeFirstSecondMixed() {
+      Fraction result = FracCalc.calculate("-3_-5/3");
+      assertEquals("-3_-5/3 should equal 4_2/3", "4_2/3", result.toString());
+   }
+      
+   @Test
+   public void negativeFirstThirdMixed() {
+      Fraction result = FracCalc.calculate("-3_5/-3");
+      assertEquals("-3_5/-3 should equal 4_2/3", "4_2/3", result.toString());
+   }
+      
+   @Test
+   public void negativeSecondThirdMixed() {
+      Fraction result = FracCalc.calculate("3_-5/-3");
+      assertEquals("3_-5/-3 should equal 4_2/3", "4_2/3", result.toString());
+   }
+      
+   @Test
+   public void negativeAllMixed() {
+      Fraction result = FracCalc.calculate("-3_-5/-3");
+      assertEquals("-3_-5/-3 should equal -4_2/3", "-4_2/3", result.toString());
+   }
+      
+   @Test
+   public void negativeWhole() {
+      Fraction result = FracCalc.calculate("-136");
+      assertEquals("-136 should equal -136", "-136", result.toString());
+   }
+      
+   @Test
+   public void negativeFirstFraction() {
+      Fraction result = FracCalc.calculate("-155/3");
+      assertEquals("-155/3 should equal -51_2/3", "-51_2/3", result.toString());
+   }
+      
+   @Test
+   public void negativeSecondFraction() {
+      Fraction result = FracCalc.calculate("155/-3");
+      assertEquals("155/-3 should equal -51_2/3", "-51_2/3", result.toString());
+   }
+         
+   @Test
+   public void negativeFirstSecondFraction() {
+      Fraction result = FracCalc.calculate("-155/-3");
+      assertEquals("-155/-3 should equal 51_2/3", "51_2/3", result.toString());
+   }
+   
+   //specifications checks- these ones were in the FracCalc specifications
+   @Test
+   public void specificationOne() {
+      Fraction result = FracCalc.calculate("1/4 + 1_1/2");
+      assertEquals("1/4 + 1_1/2 should equal 1_3/4", "1_3/4", result.toString());
+   }
+            
+   @Test
+   public void specificationTwo() {
+      Fraction result = FracCalc.calculate("8/4 + 2");
+      assertEquals("8/4 + 2 should equal 4", "4", result.toString());
+   }
+            
+   @Test
+   public void specificationThree() {
+      Fraction result = FracCalc.calculate("-1 * -1/2");
+      assertEquals("-1 * -1/2 should equal 1/2", "1/2", result.toString());
+   }
+            
+   @Test
+   public void specificationFour() {
+      Fraction result = FracCalc.calculate("11/17 - -1/17");
+      assertEquals("11/17 - -1/17 should equal 12/17", "12/17", result.toString());
+   }
+            
+   @Test
+   public void specificationFive() {
+      Fraction result = FracCalc.calculate("1/2 + 2/3");
+      assertEquals("1/2 + 2/3 should equal 1_1/6", "1_1/6", result.toString());
+   }
+   
+}

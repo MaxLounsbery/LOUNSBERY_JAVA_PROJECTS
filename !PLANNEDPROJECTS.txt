@@ -1,0 +1,5 @@
+palindrome checker, insert a string and see if it's a palindrome
+
+snake in java, use unicode(?) characters to represent snake parts and learn timing
+
+figure out how to randomize array positions with no repeats. array[5] could run through it, and have its order become 5,1,2,4,3
