@@ -6,7 +6,7 @@ public class Life {
 	public static void main(String[] args)
 	{
 		// Create a Board, using a filename.
-		Board allCells = new Board("C:\\CS\\AP_CS_ML\\LounsberyMax\\Conways\\sampleData.txt");
+		Board allCells = new Board("D:\\LOUNSBERY_JAVA_PROJECTS\\ConwaysGameOfLife\\sampleData.txt");
 
 		// Test printing out the cells
 		System.out.println(allCells);

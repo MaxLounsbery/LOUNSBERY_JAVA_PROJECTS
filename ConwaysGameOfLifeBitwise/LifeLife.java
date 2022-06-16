@@ -15,7 +15,7 @@ public class LifeLife {
 	public static void main(String[] args)
 	{
 		// Create a Board, using a filename.
-		BoardLife allCells = new BoardLife("C:\\CS\\AP_CS_ML\\LounsberyMax\\GameOfLife\\sampleData.txt");
+		BoardLife allCells = new BoardLife("D:\\LOUNSBERY_JAVA_PROJECTS\\ConwaysGameOfLifeBitwise\\sampleData.txt");
 
 		// Test printing out the cells
 		System.out.println(allCells);
