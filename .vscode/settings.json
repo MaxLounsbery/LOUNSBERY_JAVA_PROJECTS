@@ -1,0 +1,8 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "Libraries/jsoup-1.15.3.jar",
+        "Libraries/commons-imaging-1.0-alpha3.jar",
+        "Libraries/tiff-3.0.0.jar"
+    ]
+}
